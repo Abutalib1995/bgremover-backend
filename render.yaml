@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: bgremover-backend
+    env: docker
+    plan: free
+    autoDeploy: true
+
+    # Health check endpoint (optional but recommended)
+    healthCheckPath: /docs
+
+    # Persistent disk (keep outputs)
+    disk:
+      name: storage-disk
+      mountPath: /app/storage
+      sizeGB: 1
+
+    envVars:
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: MAX_UPLOAD_MB
+        value: "10"
+      - key: UPLOAD_DIR
+        value: "/app/storage/uploads"
+      - key: OUTPUT_DIR
+        value: "/app/storage/outputs"
